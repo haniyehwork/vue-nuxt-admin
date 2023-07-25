@@ -16,6 +16,7 @@
     import Menufirst from '@/components/Menufirst.vue'
     import Nav from '@/components/Nav.vue'
     import axios from 'axios';
+import { useRouter } from 'vue-router';
 
     export default {
         name: 'Secure',
@@ -24,10 +25,16 @@
             Nav
         },
         setup() {
-            onMounted(async () => {
-                const response = await axios.get('user');
 
-                console.log(response);
+            const router = useRouter();
+
+            onMounted(async () => {
+                try {
+                    const response = await axios.get('user');
+                }catch (e) {
+                    await router.push('/login');
+                }
+
                 
             })
         }

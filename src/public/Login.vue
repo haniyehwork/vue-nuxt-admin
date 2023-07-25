@@ -15,7 +15,7 @@
 <script>
 import {ref} from 'vue';
 import axios from 'axios';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 export default {
     name: 'Login',
@@ -31,6 +31,7 @@ export default {
             });
 
             localStorage.setItem('token', response.data.token);
+            axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
 
             await router.push('/');
             console.log(axios.defaults);
