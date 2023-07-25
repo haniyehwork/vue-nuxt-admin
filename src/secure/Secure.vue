@@ -3,31 +3,8 @@
     <div class="container-fluid">
         <div class="row">
             <Menufirst />
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <h2>Section title</h2>
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1,001</td>
-                                <td>random</td>
-                                <td>data</td>
-                                <td>placeholder</td>
-                                <td>text</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
+            <main role="mail" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <router-view />
             </main>
         </div>
     </div>
@@ -35,14 +12,24 @@
 </template>
 
 <script lang="ts">
+    import { onMounted } from 'vue';
     import Menufirst from '@/components/Menufirst.vue'
     import Nav from '@/components/Nav.vue'
+    import axios from 'axios';
 
     export default {
         name: 'Secure',
         components: {
             Menufirst,
             Nav
+        },
+        setup() {
+            onMounted(async () => {
+                const response = await axios.get('user');
+
+                console.log(response);
+                
+            })
         }
     }
 </script>
